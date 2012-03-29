@@ -2,18 +2,24 @@
 #define Card_h__
 
 enum CardColor{
-    Black = 0,
-    White = 1
+    BLACK = 0,
+    WHITE = 1,
+    COLORMAX = 16
 };
 class Card{
 private:
     CardColor cardColor;
     int num;
 public:
-    static const int GANG = 100;
+    static const int GANG = 0xff;
     Card(CardColor, int);
+    bool isHide;
+    bool operator<(const Card&) const;
     //Card& operator=(const Card&);
 };
+
+// it cannot overload operator< about pointer, so...
+bool PCCmp (Card* lhs, Card* rhs);
 
 #endif // Card_h__
 

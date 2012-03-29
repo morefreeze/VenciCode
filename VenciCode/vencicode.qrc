@@ -1,4 +1,6 @@
 <RCC>
-    <qresource prefix="VenciCode">
-    </qresource>
+  <qresource prefix="VenciCode">
+    <file>Resources/Cards/white_bg.png</file>
+    <file>Resources/Cards/black_bg.png</file>
+  </qresource>
 </RCC>
