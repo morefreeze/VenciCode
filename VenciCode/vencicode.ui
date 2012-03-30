@@ -40,9 +40,6 @@
         <property name="title">
          <string>Opponent</string>
         </property>
-        <zorder>label_2</zorder>
-        <zorder>label</zorder>
-        <zorder>verticalLayoutWidget</zorder>
        </widget>
       </item>
       <item>

@@ -5,6 +5,7 @@ Player::Player( string name, PutCardMode mode)
 {
     playerName = name;
     Mode = mode;
+    NeedDraw = 0;
     cards = list<Card*>();
 }
 
@@ -13,7 +14,20 @@ void Player::AddCard( Card* pc)
     if(pc == NULL)
         return ;
     cards.push_back(pc);
-    cards.sort(PCCmp);
+    //cards.sort(PCCmp);
+    int cnt = 0;
+    for(list<Card*>::reverse_iterator iCard = cards.rbegin();
+        iCard != cards.rend(); ++iCard)
+    {
+        if(PCLess(pc, *iCard))
+        {
+            swap(pc,*iCard);
+            pc = *iCard;
+        }
+        else
+            ++cnt;
+    }
+    emit AddCardAnimation(cnt);
 }
 
 PlayerStatus Player::Status()
@@ -35,4 +49,11 @@ void Player::Reset()
 {
     if(status != DYING)
         status = UNKNOWN;
+}
+
+Player::~Player()
+{
+    for(list<Card*>::iterator iCard = cards.begin();
+        iCard != cards.end();++iCard)
+        delete *iCard;
 }

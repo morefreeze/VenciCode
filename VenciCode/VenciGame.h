@@ -26,8 +26,9 @@ class VenciGame:public QObject{
 private:
     static const int INITCARDNUM[5];
     GameInfo *pGameInfo;
-    vector<Card*> deck;
+    vector< vector<Card*> > deck;
     vector<Player*> players;
+    Player *invalidPlayer;
     int curPlayerIdx;
 
     // method
@@ -38,8 +39,11 @@ public:
     ~VenciGame();
     void Start(GameInfo*);
     void Run();
+    Player &GetPlayer(int idx);
+    Player &GetCurPlayer();
+    int GetCardNum(CardColor);
 public slots:
-    Card* DrawCard();
+    void DrawCard(CardColor);
 
 };
 #endif // VenciGame_h__

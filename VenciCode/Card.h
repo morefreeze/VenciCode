@@ -19,7 +19,7 @@ public:
 };
 
 // it cannot overload operator< about pointer, so...
-bool PCCmp (Card* lhs, Card* rhs);
+bool PCLess (Card* lhs, Card* rhs);
 
 #endif // Card_h__
 

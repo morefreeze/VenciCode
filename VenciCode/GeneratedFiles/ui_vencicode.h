@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'vencicode.ui'
 **
-** Created: Fri Mar 30 01:11:12 2012
+** Created: Sat Mar 31 01:04:10 2012
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

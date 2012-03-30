@@ -7,11 +7,11 @@
 #include "VenciGame.h"
 
 
-class Clickable : public QObject
+class DeckClickable : public QObject
 {
     Q_OBJECT
 public:
-    Clickable(QObject *obj);
+    DeckClickable(QObject *obj);
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 signals:
@@ -27,12 +27,14 @@ public:
     VenciCode(QWidget *parent = 0, Qt::WFlags flags = 0);
     ~VenciCode();
 protected:
-    VenciGame *vg;
-    GameInfo *gi;
+    VenciGame *pVenciGame;
+    GameInfo *pGameInfo;
 private:
     Ui::VenciCodeClass ui;
+    vector<DeckClickable*> deckClickable;
     vector< list<QLabel*> > cardLabels;
     QLabel* MakeCardLabel(QString, CardColor);
+    void DrawNumber(QPixmap*, QString);
 
 };
 

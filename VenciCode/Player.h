@@ -14,17 +14,24 @@ enum PutCardMode{
     MANUAL = 1
 };
 
-class Player{
+class Player:public QObject{
+    Q_OBJECT
+
 private:
     string playerName;
     list<Card*> cards;
     PlayerStatus status;
     
 public:
+    int NeedDraw;
     PutCardMode Mode;
+
     Player(string name, PutCardMode);
+    ~Player();
     void AddCard(Card*);
     PlayerStatus Status();
     void Reset();
+signals:
+    void AddCardAnimation(int offset);
 };
 #endif // Player_h__

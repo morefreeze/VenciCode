@@ -10,9 +10,12 @@ void VenciGame::InitDeck(unsigned int colorNum,unsigned int digitNum)
 {
     for(int i = 0;i < colorNum; ++i)
     {
+        vector<Card*> tmpDeck;
         for(int j = 1;j < digitNum+1;++j)
-            deck.push_back(new Card((CardColor)i, j));
-        deck.push_back(new Card((CardColor)i, Card::GANG));
+            tmpDeck.push_back(new Card((CardColor)i, j));
+        tmpDeck.push_back(new Card((CardColor)i, Card::GANG));
+
+        deck.push_back(tmpDeck);
     }
 }
 
@@ -30,6 +33,7 @@ bool VenciGame::GameOver()
 // public method
 VenciGame::VenciGame()
 {
+    invalidPlayer = new Player("<Invalid Player>", AUTO);
     curPlayerIdx = 0;
     srand(time(NULL));
 }
@@ -46,21 +50,24 @@ void VenciGame::Start(GameInfo* pGI)
     for(int i = 0;i < playerNum;++i)
     {
         Player *player = new Player(""+i,AUTO);
-        for(int j = 0;j < INITCARDNUM[playerNum];++j)
-            player->AddCard(DrawCard());
+        player->NeedDraw = INITCARDNUM[playerNum];
+        //for(int j = 0;j < INITCARDNUM[playerNum];++j)
+        //    player->AddCard(DrawCard());
         players.push_back(player);
     }
 }
 
-Card* VenciGame::DrawCard()
+void VenciGame::DrawCard( CardColor color)
 {
     if(deck.size() == 0)
-        return NULL;
-    int idx = rand() % deck.size();
-    swap(deck[idx], deck.back() );
-    Card* res = deck.back();
-    deck.pop_back();
-    return res;
+        return ;
+    int idx = rand() % deck[color].size();
+    swap(deck[color][idx], deck[color].back() );
+    Card* res = deck[color].back();
+    deck[color].pop_back();
+
+    Player &curPlayer = GetCurPlayer();
+    curPlayer.AddCard(res);
 }
 
 void VenciGame::Run()
@@ -74,7 +81,27 @@ void VenciGame::Run()
         for(int i = 0;i < players.size(); ++i)
             players[i]->Reset();
         Player& curPlayer = *players[curPlayerIdx];
-        curPlayer.AddCard(DrawCard());
         
     }
+}
+
+Player & VenciGame::GetPlayer( int idx )
+{
+    if(0 <= idx && idx < players.size())
+        return *players[idx];
+    return *invalidPlayer;
+}
+
+Player & VenciGame::GetCurPlayer()
+{
+    if(curPlayerIdx < players.size())
+        return *players[curPlayerIdx];
+    return *invalidPlayer;
+}
+
+int VenciGame::GetCardNum( CardColor color)
+{
+    if(color < deck.size())
+        return deck[color].size();
+    return 0;
 }

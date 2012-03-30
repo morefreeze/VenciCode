@@ -14,7 +14,7 @@ bool Card::operator<( const Card& rhs) const
 }
 
 // extern cmp function
-bool PCCmp (Card* lhs, Card* rhs)
+bool PCLess (Card* lhs, Card* rhs)
 {
     return (*lhs) < (*rhs);
 }
