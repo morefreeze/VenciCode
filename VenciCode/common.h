@@ -11,4 +11,5 @@
 using namespace std;
 
 #include <QtGui/QMainWindow>
+#include <QParallelAnimationGroup>
 #endif // common_h__

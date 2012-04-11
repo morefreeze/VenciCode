@@ -28,10 +28,11 @@ public:
 
     Player(string name, PutCardMode);
     ~Player();
-    void AddCard(Card*);
+    void DrawCard(Card*);
     PlayerStatus Status();
-    void Reset();
+    void ResetMode();
+    list<Card*> &GetCards();
 signals:
-    void AddCardAnimation(int offset);
+    void DrawCardAnimationSign(Card*, int);
 };
 #endif // Player_h__

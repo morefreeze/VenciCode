@@ -2,21 +2,10 @@
 #define VENCICODE_H
 
 #include <QtGui/QMainWindow>
-#include <QPainter>
 #include "ui_vencicode.h"
 #include "VenciGame.h"
-
-
-class DeckClickable : public QObject
-{
-    Q_OBJECT
-public:
-    DeckClickable(QObject *obj);
-protected:
-    bool eventFilter(QObject *obj, QEvent *event);
-signals:
-    void DrawCardSign();
-};
+#include "CardLabel.h"
+#include <QPropertyAnimation>
 
 
 class VenciCode : public QMainWindow
@@ -29,13 +18,15 @@ public:
 protected:
     VenciGame *pVenciGame;
     GameInfo *pGameInfo;
-private:
-    Ui::VenciCodeClass ui;
-    vector<DeckClickable*> deckClickable;
-    vector< list<QLabel*> > cardLabels;
-    QLabel* MakeCardLabel(QString, CardColor);
-    void DrawNumber(QPixmap*, QString);
+    QParallelAnimationGroup drawAnimationGroup;
 
+private:
+    static const QRect InitDeckRect[(int)COLORMAX];
+    Ui::VenciCodeClass ui;
+    vector< CardLabel* > cardDecks;
+    vector< list<CardLabel*> > cardPlayers;
+public slots:
+    void DrawCardAnimation(Card*, int);
 };
 
 #endif // VENCICODE_H

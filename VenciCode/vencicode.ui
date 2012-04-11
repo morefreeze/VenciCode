@@ -26,12 +26,6 @@
    <enum>Qt::LeftToRight</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <layout class="QVBoxLayout" name="GameLayout">
@@ -53,42 +47,27 @@
     </item>
     <item>
      <layout class="QVBoxLayout" name="DeckLayout">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
-      </property>
       <item>
-       <widget class="QLabel" name="BlackDeck">
+       <widget class="QGroupBox" name="DeckArea">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text">
-         <string/>
+        <property name="minimumSize">
+         <size>
+          <width>84</width>
+          <height>0</height>
+         </size>
         </property>
-        <property name="pixmap">
-         <pixmap resource="vencicode.qrc">:/VenciCode/Resources/Cards/black_bg.png</pixmap>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        <property name="title">
+         <string>Decks</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="WhiteDeck">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="vencicode.qrc">:/VenciCode/Resources/Cards/white_bg.png</pixmap>
-        </property>
+        <layout class="QVBoxLayout" name="verticalLayout"/>
        </widget>
       </item>
      </layout>

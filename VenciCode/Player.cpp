@@ -9,25 +9,30 @@ Player::Player( string name, PutCardMode mode)
     cards = list<Card*>();
 }
 
-void Player::AddCard( Card* pc)
+void Player::DrawCard( Card* pc)
 {
     if(pc == NULL)
         return ;
-    cards.push_back(pc);
     //cards.sort(PCCmp);
-    int cnt = 0;
-    for(list<Card*>::reverse_iterator iCard = cards.rbegin();
-        iCard != cards.rend(); ++iCard)
+    int offset = 0;
+    list<Card*>::iterator tmpICard = cards.begin();
+    for(list<Card*>::iterator iCard = cards.begin();
+        iCard != cards.end(); ++iCard)
     {
-        if(PCLess(pc, *iCard))
+        if(PCLess(*iCard, pc))
         {
-            swap(pc,*iCard);
-            pc = *iCard;
+            if(0 != offset)
+                ++tmpICard;
+            ++offset;
         }
         else
-            ++cnt;
+        {
+            break;
+        }
     }
-    emit AddCardAnimation(cnt);
+    cards.insert(tmpICard, pc);
+    NeedDraw--;
+    emit DrawCardAnimationSign(pc, offset);
 }
 
 PlayerStatus Player::Status()
@@ -38,14 +43,14 @@ PlayerStatus Player::Status()
         iCard != cards.end();++iCard)
     {
         const Card* c = *iCard;
-        if(c->isHide)
+        if(c->IsHide)
             return status = LIVING;
     }
     return status = DYING;
 }
 
 // reset status UNKNOWN to update
-void Player::Reset()
+void Player::ResetMode()
 {
     if(status != DYING)
         status = UNKNOWN;
@@ -53,7 +58,15 @@ void Player::Reset()
 
 Player::~Player()
 {
-    for(list<Card*>::iterator iCard = cards.begin();
-        iCard != cards.end();++iCard)
-        delete *iCard;
+    // it will delete at ~VenciGame
+    //for(list<Card*>::iterator iCard = cards.begin();
+    //    iCard != cards.end();++iCard)
+    //    if(NULL != *iCard)
+    //        delete *iCard;
+    cards.clear();
+}
+
+list<Card*> & Player::GetCards()
+{
+    return cards;
 }

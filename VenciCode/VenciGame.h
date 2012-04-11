@@ -29,19 +29,23 @@ private:
     vector< vector<Card*> > deck;
     vector<Player*> players;
     Player *invalidPlayer;
-    int curPlayerIdx;
 
     // method
     void InitDeck(unsigned int,unsigned int DigitNum);
     bool GameOver();
 public:
+    int CurPlayerIdx;
+    int OwnPlayerIdx;
     VenciGame();
     ~VenciGame();
     void Start(GameInfo*);
     void Run();
+    GameInfo &GetGameInfo();
     Player &GetPlayer(int idx);
+    Player &GetOwnPlayer();
     Player &GetCurPlayer();
     int GetCardNum(CardColor);
+    QString GetCardNumStr(CardColor);
 public slots:
     void DrawCard(CardColor);
 
