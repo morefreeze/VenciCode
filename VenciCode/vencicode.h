@@ -5,7 +5,7 @@
 #include "ui_vencicode.h"
 #include "VenciGame.h"
 #include "CardLabel.h"
-#include <QPropertyAnimation>
+
 
 
 class VenciCode : public QMainWindow

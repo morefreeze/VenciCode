@@ -130,6 +130,8 @@ QString VenciGame::GetCardNumStr( CardColor color)
 }
 
 //public slots
+// swap the card drew and last card, then pop_back
+// let current player draw this card
 void VenciGame::DrawCard( CardColor color)
 {
     if(deck.size() == 0)

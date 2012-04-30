@@ -13,6 +13,8 @@ void Player::DrawCard( Card* pc)
 {
     if(pc == NULL)
         return ;
+    if (0 >= NeedDraw)
+        return ;
     //cards.sort(PCCmp);
     int offset = 0;
     list<Card*>::iterator tmpICard = cards.begin();

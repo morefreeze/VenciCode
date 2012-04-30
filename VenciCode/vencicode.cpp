@@ -15,7 +15,7 @@ VenciCode::VenciCode(QWidget *parent, Qt::WFlags flags)
         cardPlayers.push_back(list<CardLabel*>());
     }
 
-    // add deck lable manual
+    // add deck label manual
     CardLabel *pCardDeck = NULL;
     for(int i = 0;i < COLORMAX;++i)
     {
@@ -78,7 +78,7 @@ void VenciCode::DrawCardAnimation( Card* pc, int offset )
             moveRightAnimation->setDuration(500);
             QRect rect = (*pCurCardLabel)->geometry();
             moveRightAnimation->setStartValue(rect);
-            rect.setX(rect.x() + 60);
+            rect.moveLeft(rect.x() + 60);
             moveRightAnimation->setEndValue(rect);
             drawAnimationGroup.addAnimation(moveRightAnimation);
         }
@@ -91,10 +91,11 @@ void VenciCode::DrawCardAnimation( Card* pc, int offset )
     rect.setX(64*offset + 10);
     rect.setY(10+100);
     insertAnimation->setStartValue(rect);
-    rect.setY(10);
+    rect.moveTo(QPoint( (64*offset + 74), (10) ) );
     insertAnimation->setEndValue(rect);
     drawAnimationGroup.addAnimation(insertAnimation);
     pNewCard->show();
+        
     drawAnimationGroup.start();
     //while(drawAnimationGroup.state() == QAbstractAnimation::Running);
     
